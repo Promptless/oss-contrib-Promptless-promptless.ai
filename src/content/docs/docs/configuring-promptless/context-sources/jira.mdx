@@ -8,7 +8,7 @@ sidebar:
 import Frame from '@components/fern/Frame.astro';
 import Note from '@components/fern/Note.astro';
 
-Jira integration provides **read-only** access to your project management and issue tracking data for documentation automation. When Jira is configured as a context source, Promptless can search for related tickets to understand requirements and business context—but it never modifies your Jira tickets.
+Jira integration provides access to your project management and issue tracking data for documentation automation. When Jira is configured as a context source, Promptless can search for related tickets to understand requirements and business context. Promptless can also create new Jira issues to track documentation tasks or link documentation work to your existing workflows.
 
 ## How It Works as Context Source
 
@@ -25,6 +25,21 @@ If a GitHub PR references a Jira ticket (like "PROJ-123"), Promptless automatica
 ## JQL Search Capabilities
 
 Promptless leverages Jira's powerful JQL (Jira Query Language) search functionality to find relevant context. This allows intelligent searching across your Jira projects to find related issues, epics, and dependencies.
+
+## Jira Issue Creation
+
+Promptless can create Jira issues to track documentation work or integrate with your existing project management workflows. When creating issues, Promptless provides:
+
+- **Project key**: The Jira project where the issue will be created (e.g., `DOCS`)
+- **Issue type**: Standard Jira issue types such as `Task` or `Bug`
+- **Summary**: A short title for the issue
+- **Description**: Plain-text description (Promptless converts this to the appropriate format for your Jira instance)
+
+Promptless can also attach labels and link new issues to existing tickets in your project.
+
+<Note>
+Issue creation requires the `write:jira-work` scope. If your organization configured a limited-access Atlassian account for Promptless, ensure that account has permission to create issues in the target project.
+</Note>
 
 ## Configuration
 
@@ -44,7 +59,7 @@ Promptless inherits the permissions of the Jira account used during OAuth connec
 
 ## Data Privacy and Security
 
-Promptless queries Jira data in real-time and does not store any of your Jira data. All searches are performed on-demand when documentation updates are needed. Promptless only reads from Jira—it never creates, updates, or deletes tickets.
+Promptless queries Jira data in real-time and does not store any of your Jira data. All searches are performed on-demand when documentation updates are needed. When agents create Jira issues, only the metadata you would expect—project, type, summary, description, labels, and links—is sent to Jira.
 
 For information about data processing and redaction capabilities, see the Atlassian integration page.
 
